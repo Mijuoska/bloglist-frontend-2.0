@@ -43,6 +43,19 @@ useEffect(() => {
   dispatch(getUsers())
 }, [dispatch])
 
+
+const Menu = () => {
+  const menuStyle = {backgroundColor: 'grey', padding: 5}
+  const margin = {margin: 2}
+  return (
+  <div style={menuStyle}>
+  
+  <Link style={margin} to='/'>Blogs</Link> <Link style={margin} to='/users'>Users</Link>
+    <span>Hi {loggedInUser.name}<button style={margin} onClick={() => handleLogout()}>Logout</button></span>
+  </div>
+  )
+}
+
   const createBlog = async (blogObject) => {
     blogFormRef.current.toggleVisibility()
     try {
@@ -87,9 +100,7 @@ const blog = blogMatch ? blogs.find(blog => blog.id === blogMatch.params.id) : n
   return (
     <div>
       <h2>Blog listing</h2>
-      <p>
-        <span>Hi {loggedInUser.name}!</span><button onClick={() => handleLogout()}>Logout</button>
-      </p>
+      <Menu/>
       <Switch>
       <Route path="/blogs/:id">
       <BlogPage blog={blog} user={loggedInUser}/>

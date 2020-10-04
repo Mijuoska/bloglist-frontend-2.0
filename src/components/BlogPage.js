@@ -1,4 +1,5 @@
 import React from 'react'
+import Comments from './Comments'
 import { useDispatch } from 'react-redux'
 import { likeBlog, deleteBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
@@ -21,12 +22,13 @@ const BlogPage = ({ blog, user }) => {
      dispatch(likeBlog(blog))
    }
 
+   
+
   if (!blog) {
     return null
   }
   return (
   
-
     <div className='blog'>
       <h2>{blog.title} by {blog.author}</h2>
          <p><a href={`${blog.url}`} target="_blank">{blog.url}</a></p>
@@ -37,7 +39,10 @@ const BlogPage = ({ blog, user }) => {
         Added by {blog.user.name}
         </p>
         <button style={{ display: user.id === blog.user.id ? '' : 'none' }} id={blog.id} onClick={removeBlog}>Delete</button>
-    </div>
+
+        <Comments blogId = {blog.id} comments={blog.comments}/>
+  
+        </div>
   )
 }
 

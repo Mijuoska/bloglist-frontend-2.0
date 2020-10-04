@@ -43,6 +43,16 @@ export const deleteBlog = (id) => {
     }
 }
 
+export const createComment = (id, comment) => {
+    return async dispatch => {
+        const newComment = await blogService.createComment(id, comment)
+        dispatch({
+            type:"ADD COMMENT",
+            data: {blogId: newComment.blog, content: newComment.content, id: newComment.id}
+        })
+    }
+}
+
 const blogReducer = (state = [], action) => {
     switch(action.type) {
         case 'NEW BLOG': {
@@ -72,7 +82,14 @@ const blogReducer = (state = [], action) => {
                     return 0
                 }
             })
-        } case 'INIT_BLOGS': {
+        } case 'ADD COMMENT': {
+            const commentedBlog = state.find(blog => blog.id === action.data.blogId)
+            const newComment = {id: action.data.id, content: action.data.content}
+            commentedBlog.comments = [...commentedBlog.comments, newComment]
+            return state.map(blog => commentedBlog.id !== blog.id ? blog : commentedBlog)
+        } 
+        
+        case 'INIT_BLOGS': {
             return action.data.sort((a, b) => {
                 if(a.likes > b.likes) {
                     return -1
