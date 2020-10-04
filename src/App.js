@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
 import Togglable from './components/Togglable'
 import Notification from './components/Notification'
+import Users from './components/Users'
 import { initializeBlogs, addBlog } from './reducers/blogReducer'
 import { fetchUser, logIn, logOut} from './reducers/userReducer'
 import { setNotification } from './reducers/notificationReducer'
@@ -72,16 +73,24 @@ const App = () => {
   }
   return (
     <div>
+    <Router>
       <h2>Blog listing</h2>
       <p>
         <span>Hi {user.name}!</span><button onClick={() => handleLogout()}>Logout</button>
       </p>
-
+      <Switch>
+      <Route path="/users">
+      <Users/>
+      </Route>
+      <Route path="/">
       <Notification message={message.content} messageType={message.messageType}/>
       <Togglable buttonLabel='new Blog' ref={blogFormRef}>
         <BlogForm createBlog={createBlog}/>
       </Togglable>
       <BlogList user={user}/>
+      </Route>
+          </Switch>
+</Router>
     </div>
   )
 }
