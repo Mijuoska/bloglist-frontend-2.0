@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch,
 import BlogList from './components/BlogList'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
+import BlogPage from './components/BlogPage'
 import Togglable from './components/Togglable'
 import Notification from './components/Notification'
 import Users from './components/Users'
@@ -11,6 +12,7 @@ import User from './components/User'
 import { initializeBlogs, addBlog } from './reducers/blogReducer'
 import { getUsers, fetchUser, logIn, logOut} from './reducers/userReducer'
 import { setNotification } from './reducers/notificationReducer'
+import blogs from './services/blogs'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -21,6 +23,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   // Get blogs and notifications
+  const blogs = useSelector(state => state.blogs)
   const message = useSelector(state => state.notification)
   const loggedInUser = useSelector(state => state.user)
   const users = useSelector(state => state.users)
@@ -66,8 +69,11 @@ useEffect(() => {
     dispatch(logOut())
   }
 
-const match = useRouteMatch('/users/:id')
-const user = match ? users.find(user => user.id === match.params.id) : null
+const userMatch = useRouteMatch('/users/:id')
+const user = userMatch ? users.find(user => user.id === userMatch.params.id) : null
+
+const blogMatch = useRouteMatch('/blogs/:id')
+const blog = blogMatch ? blogs.find(blog => blog.id === blogMatch.params.id) : null
 
   if (loggedInUser === null) {
     return (
@@ -85,6 +91,9 @@ const user = match ? users.find(user => user.id === match.params.id) : null
         <span>Hi {loggedInUser.name}!</span><button onClick={() => handleLogout()}>Logout</button>
       </p>
       <Switch>
+      <Route path="/blogs/:id">
+      <BlogPage blog={blog} user={loggedInUser}/>
+      </Route>
       <Route path="/users/:id">
       <User user={user}/>
       </Route>
@@ -96,7 +105,7 @@ const user = match ? users.find(user => user.id === match.params.id) : null
       <Togglable buttonLabel='new Blog' ref={blogFormRef}>
         <BlogForm createBlog={createBlog}/>
       </Togglable>
-      <BlogList user={loggedInUser}/>
+      <BlogList user={loggedInUser} blogs={blogs}/>
       </Route>
           </Switch>
     </div>
