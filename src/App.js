@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
-import Blog from './components/Blog'
+import { useDispatch, useSelector } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch, useHistory } from 'react-router-dom'
+import BlogList from './components/BlogList'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
 import Togglable from './components/Togglable'
 import Notification from './components/Notification'
-import blogService from './services/blogs'
-import loginService from './services/login'
-import { initializeBlogs, deleteBlog, addBlog, likeBlog } from './reducers/blogReducer'
+import { initializeBlogs, addBlog } from './reducers/blogReducer'
 import { fetchUser, logIn, logOut} from './reducers/userReducer'
 import { setNotification } from './reducers/notificationReducer'
-import { useDispatch, useSelector } from 'react-redux'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -19,7 +18,6 @@ const App = () => {
   const dispatch = useDispatch()
 
   // Get blogs and notifications
-  const blogs = useSelector(state => state.blogs)
   const message = useSelector(state => state.notification)
   const user = useSelector(state => state.user)
 
@@ -45,20 +43,6 @@ const App = () => {
     }
   }
 
-  const removeBlog = async (event) => {
-    const result = window.confirm('Are you sure you want to delete this blog?')
-    if (result) {
-      const ID = event.target.id
-      dispatch(deleteBlog(ID))
-      dispatch(setNotification(`Deleted blog`, 'success', 5000))
-    }
-
-  }
-
-  const addLike = async (id) => {
-    const blog = blogs.find(blog => blog.id === id)
-    dispatch(likeBlog(blog))
-  }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -97,13 +81,7 @@ const App = () => {
       <Togglable buttonLabel='new Blog' ref={blogFormRef}>
         <BlogForm createBlog={createBlog}/>
       </Togglable>
-      <div>
-        <h3>List of blogs</h3>
-        <div className="blog-list">
-          {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} user={user} removeBlog={removeBlog} likeBlog={()=>addLike(blog.id)}/>)}
-        </div>
-      </div>
+      <BlogList user={user}/>
     </div>
   )
 }
