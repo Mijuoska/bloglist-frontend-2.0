@@ -1,5 +1,6 @@
 import blogService from '../services/blogs'
 import loginService from '../services/login'
+import userService from '../services/users'
 
 const initialState = null
 
@@ -43,8 +44,21 @@ export const fetchUser = () => {
     }
 }
 
+export const getUsers = () => {
+    return async dispatch => {
+        const users = await userService.getAll()
+        dispatch(
+            {
+             type: 'ALL',
+             data: users
+            }
 
-const userReducer = (state = null, action) => {
+        )
+    }
+}
+
+
+export const loginReducer = (state = null, action) => {
     switch(action.type) {
         case 'LOGIN': {
             return action.data
@@ -59,4 +73,12 @@ const userReducer = (state = null, action) => {
 
 }
 
-export default userReducer
+export const userReducer = (state = [], action) => {
+    switch(action.type) {
+        case 'ALL':{
+            return action.data
+        } default: {
+            return state
+        }
+    }
+}

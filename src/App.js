@@ -7,20 +7,23 @@ import BlogForm from './components/BlogForm'
 import Togglable from './components/Togglable'
 import Notification from './components/Notification'
 import Users from './components/Users'
+import User from './components/User'
 import { initializeBlogs, addBlog } from './reducers/blogReducer'
-import { fetchUser, logIn, logOut} from './reducers/userReducer'
+import { getUsers, fetchUser, logIn, logOut} from './reducers/userReducer'
 import { setNotification } from './reducers/notificationReducer'
 
 const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+
   const blogFormRef = useRef()
   const dispatch = useDispatch()
 
   // Get blogs and notifications
   const message = useSelector(state => state.notification)
-  const user = useSelector(state => state.user)
+  const loggedInUser = useSelector(state => state.user)
+  const users = useSelector(state => state.users)
 
 // fetch logged in user from local storage and set user
   useEffect(() => {
@@ -32,7 +35,10 @@ const App = () => {
    dispatch(initializeBlogs())
   }, [dispatch])
 
-
+  // fetch all users
+useEffect(() => {
+  dispatch(getUsers())
+}, [dispatch])
 
   const createBlog = async (blogObject) => {
     blogFormRef.current.toggleVisibility()
@@ -60,9 +66,10 @@ const App = () => {
     dispatch(logOut())
   }
 
+const match = useRouteMatch('/users/:id')
+const user = match ? users.find(user => user.id === match.params.id) : null
 
-
-  if (user === null) {
+  if (loggedInUser === null) {
     return (
       <div>
         <h2>Log in to blog listing app</h2>
@@ -73,24 +80,25 @@ const App = () => {
   }
   return (
     <div>
-    <Router>
       <h2>Blog listing</h2>
       <p>
-        <span>Hi {user.name}!</span><button onClick={() => handleLogout()}>Logout</button>
+        <span>Hi {loggedInUser.name}!</span><button onClick={() => handleLogout()}>Logout</button>
       </p>
       <Switch>
-      <Route path="/users">
-      <Users/>
+      <Route path="/users/:id">
+      <User user={user}/>
+      </Route>
+       <Route path="/users">
+      <Users users={users}/>
       </Route>
       <Route path="/">
       <Notification message={message.content} messageType={message.messageType}/>
       <Togglable buttonLabel='new Blog' ref={blogFormRef}>
         <BlogForm createBlog={createBlog}/>
       </Togglable>
-      <BlogList user={user}/>
+      <BlogList user={loggedInUser}/>
       </Route>
           </Switch>
-</Router>
     </div>
   )
 }
