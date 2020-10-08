@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route, NavLink, useParams, useRouteMatch, useHistory } from 'react-router-dom'
+import { BrowserRouter as Switch, Route, NavLink, useRouteMatch } from 'react-router-dom'
 import BlogList from './components/BlogList'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
@@ -12,12 +12,10 @@ import User from './components/User'
 import { initializeBlogs, addBlog } from './reducers/blogReducer'
 import { getUsers, fetchUser, logIn, logOut} from './reducers/userReducer'
 import { setNotification } from './reducers/notificationReducer'
-import blogs from './services/blogs'
 
 const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [isActive, setActive] = useState({'blogs': true, 'users': false})
 
 
   const blogFormRef = useRef()
