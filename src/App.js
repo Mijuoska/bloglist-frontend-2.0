@@ -111,8 +111,8 @@ const blog = blogMatch ? blogs.find(blog => blog.id === blogMatch.params.id) : n
       <Users users={users}/>
       </Route>
       <Route path="/">
-      <Notification message={message.content} messageType={message.messageType}/>
       <div className="container flex flex-col">
+        <Notification message={message.content} messageType={message.messageType}/>
       <Togglable buttonLabel='New Blog' ref={blogFormRef}>
         <BlogForm createBlog={createBlog}/>
       </Togglable>

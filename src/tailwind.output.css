@@ -22388,6 +22388,7 @@ video {
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 25px;
+  margin-left: 50px;
   width: 40%;
 }
 
@@ -22409,10 +22410,6 @@ video {
   margin-top: 8px;
   padding: 12px;
   box-shadow: 11px 13px 7px -7px rgba(0,0,0,0.75);
-}
-
-.active {
-  text-decoration: underline;
 }
 
 @media (min-width: 640px) {
