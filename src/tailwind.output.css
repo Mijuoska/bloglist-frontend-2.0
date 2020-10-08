@@ -22388,6 +22388,7 @@ video {
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 25px;
+  margin-left: 50px;
   width: 40%;
 }
 
@@ -109314,4 +109315,3 @@ video {
             animation: bounce 1s infinite;
   }
 }
-
