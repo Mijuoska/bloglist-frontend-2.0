@@ -17,7 +17,6 @@ import blogs from './services/blogs'
 const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [isActive, setActive] = useState({'blogs': true, 'users': false})
 
 
   const blogFormRef = useRef()
@@ -49,9 +48,9 @@ const Menu = () => {
   return (
   <nav className="border-solid mb-8 pb-6 pt-4 pr-8 pl-4 bg-gray-600 text-white pl-4">
         <span className="text-md font-bold">The Blog List</span>
-  <NavLink className= "ml-6 hover:text-blue-800"
+  <NavLink className= "ml-6 hover:text-blue-800" activeClassName="active"
   to = '/'> Blogs </NavLink><NavLink
-  className="ml-4 hover:text-blue-800" to='/users'>Users</NavLink>
+  className="ml-4 hover:text-blue-800" activeClassName="active" to='/users'>Users</NavLink>
   <span className="float-right">Hi {loggedInUser.name}!<button 
   className="ml-3 border-solid border-2 border-black pb-2 pt-1 pl-1 pr-1 rounded bg-black hover:bg-white hover:text-black hover:border-black" onClick={() => handleLogout()}>Logout</button></span>
   </nav>
