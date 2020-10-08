@@ -22411,10 +22411,6 @@ video {
   box-shadow: 11px 13px 7px -7px rgba(0,0,0,0.75);
 }
 
-.active {
-  text-decoration: underline;
-}
-
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -109318,3 +109314,4 @@ video {
             animation: bounce 1s infinite;
   }
 }
+

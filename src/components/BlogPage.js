@@ -3,10 +3,13 @@ import Comments from './Comments'
 import { useDispatch } from 'react-redux'
 import { likeBlog, deleteBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
+import { useHistory } from 'react-router-dom'
+
 
 const BlogPage = ({ blog, user }) => {
 
   const dispatch = useDispatch()
+  const history = useHistory()
 
    const removeBlog = async (event) => {
      const result = window.confirm('Are you sure you want to delete this blog?')
@@ -14,6 +17,7 @@ const BlogPage = ({ blog, user }) => {
        const ID = event.target.id
        dispatch(deleteBlog(ID))
        dispatch(setNotification(`Deleted blog`, 'success', 5000))
+       history.push('/')
      }
 
    }

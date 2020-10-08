@@ -14,6 +14,7 @@ const BlogForm = ( { createBlog } ) => {
     setTitle('')
     setAuthor('')
     setUrl('')
+
   }
 
 
@@ -23,7 +24,7 @@ const BlogForm = ( { createBlog } ) => {
     <h3 className="mb-3">Submit a blog</h3>
       <form onSubmit={handleBlogSubmit}>
         <div>
-  Title: <input className="border border-2 border-gray-500 rounded-r px-2 w-full py-1"type="text" name="Title" id="title" value={title} onChange={({ target }) => setTitle(target.value)}/>
+  Title: <input required className="border border-2 border-gray-500 rounded-r px-2 w-full py-1"type="text" name="Title" id="title" value={title} onChange={({ target }) => setTitle(target.value)}/>
         </div>
         <div>
      Author: <input className="border border-2 border-gray-500 rounded-r px-2 w-full py-1" type="text" name="Author" id="author" value={author}  onChange={({ target }) => setAuthor(target.value)} />
