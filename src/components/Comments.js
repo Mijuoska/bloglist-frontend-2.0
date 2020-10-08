@@ -36,7 +36,7 @@ const CommentForm = () => {
     } else {
         return (
             <div>
-            <p>This blog doesn't have any comments yet. Be the fist to comment!</p>
+            <p>This blog doesn't have any comments yet. Be the first to comment!</p>
         <CommentForm/>
 
             </div>

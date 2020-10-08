@@ -35,7 +35,7 @@ const App = () => {
 // fetch all blogs
   useEffect(() => {
    dispatch(initializeBlogs())
-  }, [dispatch])
+  }, [dispatch, blogs])
 
   // fetch all users
 useEffect(() => {
