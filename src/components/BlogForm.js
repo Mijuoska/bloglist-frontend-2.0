@@ -19,18 +19,19 @@ const BlogForm = ( { createBlog } ) => {
 
 
   return (
-    <div>
+    <div className="border-solid border-grey-300 rounded border-2 p-4 max-w-md" >
+    <h3 className="mb-3">Submit a blog</h3>
       <form onSubmit={handleBlogSubmit}>
         <div>
-  Title: <input type="text" name="Title" id="title" value={title} onChange={({ target }) => setTitle(target.value)}/>
+  Title: <input className="border border-2 border-gray-500 rounded-r px-2 w-full py-1"type="text" name="Title" id="title" value={title} onChange={({ target }) => setTitle(target.value)}/>
         </div>
         <div>
-     Author: <input type="text" name="Author" id="author" value={author}  onChange={({ target }) => setAuthor(target.value)} />
+     Author: <input className="border border-2 border-gray-500 rounded-r px-2 w-full py-1" type="text" name="Author" id="author" value={author}  onChange={({ target }) => setAuthor(target.value)} />
         </div>
         <div>
-     Url: <input type="text" name="Url" id="url" value={url} onChange={({ target }) => setUrl(target.value)}/>
+     Url: <input className="border border-2 border-gray-500 rounded-r px-2 w-full py-1" type="text" name="Url" id="url" value={url} onChange={({ target }) => setUrl(target.value)}/>
         </div>
-        <button type="submit">Create</button>
+        <button className="mt-4 bg-green-700 rounded pb-1 pt-1 pl-2 pr-2 text-white" type="submit">Create</button>
       </form>
 
     </div>

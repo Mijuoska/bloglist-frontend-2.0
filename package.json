@@ -16,9 +16,13 @@
     "react-scripts": "^3.4.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "save-dev": "0.0.1-security"
+    "save-dev": "0.0.1-security",
+    "tailwindcss": "^1.8.10"
   },
   "scripts": {
+    "build:tailwind": "tailwindcss build src/index.css -o src/tailwind.output.css",
+    "prestart": "npm run build:tailwind",
+    "prebuild": "npm run build:tailwind",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -17,19 +17,19 @@ const addComment = async (event) => {
 const CommentForm = () => {
     return (
  <form onSubmit={addComment}>
-        <input type="text" name="comment" placeholder="Write a comment"></input>
-        <button type="submit">Submit</button>
+        <textarea className="border border-2 border-gray-500 rounded-r px-2 w-full py-1" rows={2} name="comment" placeholder="Write a comment"></textarea>
+        <button className="border-gray-800 rounded pl-2 pr-2 pt-1 pb-1 bg-gray-800 text-white" type="submit">Submit</button>
         </form>
     )
 }
 
     if (comments.length > 0) {
     return (
-        <div>
-         <h3>Comments</h3>
+        <div className="mt-4">
+         <h3 className="text-lg font-semibold">Comments</h3>
         <CommentForm/>
-    <ul>
-    {comments.map(comment => <li key={comment.id}>{comment.content}</li>)}
+    <ul className="mt-4">
+    {comments.map(comment => <li className="border-solid border-gray-200 border-b-2 p-2" key={comment.id}>{comment.content}</li>)}
     </ul>
     </div>
     )

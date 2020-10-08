@@ -19,13 +19,14 @@ return {
 })
 
   return (
-    <div>
+    <div className="flex place-content-start mx-48">
       <div style={hideWhenVisible}>
-        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
+        <button className="flex-1 mb-8 p-2 rounded bg-green-800 text-white hover:bg-green-500" 
+        onClick={toggleVisibility}>{props.buttonLabel}</button>
       </div>
       <div style={showWhenVisible} className="togglableContent">
         {props.children}
-        <button onClick={toggleVisibility}>Hide</button>
+        <button className="pl-2 pr-2 pt-1 pb-1 mt-4 mb-4 rounded bg-gray-500" onClick={toggleVisibility}>Hide</button>
       </div>
     </div>
   )

@@ -1,4 +1,8 @@
+@tailwind base;
 
+@tailwind components;
+
+@tailwind utilities;
 
 .success {
     color: black;
@@ -23,11 +27,11 @@
 }
 
 .blog {
-    border: 1px solid black;
+    border: 1px solid grey;
+    border-radius: 5px;
     margin-bottom: 4px;
     margin-top: 8px;
-    padding: 8px;
-    width: 40%;
+    padding: 12px;
     box-shadow: 11px 13px 7px -7px rgba(0,0,0,0.75);
-
 }
+
