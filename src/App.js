@@ -30,18 +30,19 @@ const App = () => {
 // fetch logged in user from local storage and set user
   useEffect(() => {
     dispatch(fetchUser())
-  }, [dispatch])
+  }, [])
 
 // fetch all blogs
   useEffect(() => {
    dispatch(initializeBlogs())
-  }, [dispatch, blogs])
+  }, [])
 
   // fetch all users
 useEffect(() => {
   dispatch(getUsers())
-}, [dispatch])
+}, [])
 
+console.log(blogs)
 
 const Menu = () => {
   return (
